@@ -100,6 +100,6 @@ CREATE TABLE COURSE_STUDENT(
   "id" BIGINT PRIMARY KEY,
   "name" TEXT,
   "gpa" DECIMAL,
-  "address.city" TEXT,
-  "address.country" TEXT
+  "address_city" TEXT,
+  "address_country" TEXT
 );

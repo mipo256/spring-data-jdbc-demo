@@ -1,10 +1,12 @@
 package tech.mpolivaha.jdbc_demo.known;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Optional;
 import java.util.UUID;
+import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -34,15 +36,6 @@ class IdGenerationTest_1 extends AbstractIntegrationTest {
   private AircraftRepository aircraftRepository;
 
   @Test
-  void whenUsingJdbcAggregateTemplate_thenInsertCanHelp() {
-    UUID id = UUID.fromString("83d72eb5-9eb6-4218-959c-ce333b1fc5f2");
-
-    assertThatThrownBy(() -> aircraftRepository.save(new Aircraft(id, "My Model")))
-        .hasCauseInstanceOf(IncorrectUpdateSemanticsDataAccessException.class)
-        .hasMessage("Failed to execute DbAction.UpdateRoot(entity=Aircraft(id=83d72eb5-9eb6-4218-959c-ce333b1fc5f2, model=My Model))");
-  }
-
-  @Test
   void whenUsingRepository_thenIdIsOverriddenAlways() {
     UUID id = UUID.randomUUID();
 
@@ -54,9 +47,16 @@ class IdGenerationTest_1 extends AbstractIntegrationTest {
   }
 
   @Test
+  void whenUsingJdbcAggregateTemplate_thenInsertCanHelp() {
+    UUID id = UUID.fromString("83d72eb5-9eb6-4218-959c-ce333b1fc5f2");
+
+    assertThatThrownBy(() -> aircraftRepository.save(new Aircraft(id, "My Model"))).doesNotThrowAnyException();
+  }
+
+  @Test
   void whenUsingCustomBeforeConvertCallback_thenIdAssignmentDoesNotWork() {
-    assertThatThrownBy(() -> articleRepository.save(new Article().setName("Spring Data Jdbc")))
-        .isInstanceOf(DbActionExecutionException.class)
-        .hasMessageContaining("Failed to execute InsertRoot");
+    Article saved = articleRepository.save(new Article().setName("Spring Data Jdbc"));
+
+    assertThat(articleRepository.findById(saved.getId()).map(Article::getName)).hasValue("Spring Data Jdbc");
   }
 }

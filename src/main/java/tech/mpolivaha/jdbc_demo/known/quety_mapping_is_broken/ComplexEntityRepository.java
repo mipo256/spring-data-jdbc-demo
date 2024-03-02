@@ -9,8 +9,7 @@ public interface ComplexEntityRepository extends CrudRepository<ComplexEntity, L
   @Query(value = "SELECT * FROM COMPLEX_ENTITY WHERE ID = :id")
   Optional<ComplexEntity> findByIdAsItShouldBe(Long id);
 
-
-//  @Override
-//  @Query(rowMapperRef = "complexEntityRowMapper")
-//  Optional<ComplexEntity> findById(Long id);
+  @Override
+  @Query(rowMapperRef = "complexEntityRowMapper")
+  Optional<ComplexEntity> findById(Long aLong);
 }
