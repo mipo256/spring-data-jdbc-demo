@@ -10,4 +10,4 @@ public record CourseStudent(
   @Id Long id,
   String name,
   double gpa,
-  @Embedded(onEmpty = OnEmpty.USE_NULL, prefix = "address_") Address address) { }
+  @Embedded(onEmpty = OnEmpty.USE_NULL, prefix = "address.") Address address) { }
