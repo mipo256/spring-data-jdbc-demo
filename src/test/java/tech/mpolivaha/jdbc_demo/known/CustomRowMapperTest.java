@@ -14,13 +14,13 @@ import org.springframework.data.jdbc.repository.config.DefaultQueryMappingConfig
 import tech.mpolivaha.jdbc_demo.AbstractIntegrationTest;
 import tech.mpolivaha.jdbc_demo.Application;
 import tech.mpolivaha.jdbc_demo.ComplexEntityRowMapper;
-import tech.mpolivaha.jdbc_demo.known.CustomRowMapperTest_8.CurrentConfig;
-import tech.mpolivaha.jdbc_demo.known.quety_mapping_is_broken.ComplexEntity;
-import tech.mpolivaha.jdbc_demo.known.quety_mapping_is_broken.ComplexEntityRepository;
+import tech.mpolivaha.jdbc_demo.known.CustomRowMapperTest.CurrentConfig;
+import tech.mpolivaha.jdbc_demo.known.query_mapping.ComplexEntity;
+import tech.mpolivaha.jdbc_demo.known.query_mapping.ComplexEntityRepository;
 
 @SpringBootTest(classes = Application.class)
 @Import(CurrentConfig.class)
-public class CustomRowMapperTest_8 extends AbstractIntegrationTest {
+public class CustomRowMapperTest extends AbstractIntegrationTest {
 
   @Configuration
   static class CurrentConfig {

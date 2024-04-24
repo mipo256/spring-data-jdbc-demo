@@ -20,7 +20,7 @@ import tech.mpolivaha.jdbc_demo.known.timestamps_disaster.OffsetDateTimeEntityRe
 
 @Slf4j
 @SpringBootTest(classes = Application.class)
-public class TimestampsDisasterTest_5 extends AbstractIntegrationTest {
+public class TimestampsDisasterTest extends AbstractIntegrationTest {
 
   @Autowired
   private HouseRepository houseRepository;

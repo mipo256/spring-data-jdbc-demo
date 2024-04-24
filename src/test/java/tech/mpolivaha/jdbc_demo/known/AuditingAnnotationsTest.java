@@ -14,7 +14,7 @@ import tech.mpolivaha.jdbc_demo.known.auditingannotations.Post;
 import tech.mpolivaha.jdbc_demo.known.auditingannotations.PostRepository;
 
 @SpringBootTest(classes = Application.class)
-public class AuditingAnnotationsTest_3 extends AbstractIntegrationTest {
+public class AuditingAnnotationsTest extends AbstractIntegrationTest {
 
   @Autowired
   private PostRepository postRepository;

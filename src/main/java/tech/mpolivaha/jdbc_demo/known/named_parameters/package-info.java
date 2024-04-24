@@ -3,6 +3,6 @@
  */
 
 @NonNullApi
-package tech.mpolivaha.jdbc_demo.known.parameters_in_single_quotes;
+package tech.mpolivaha.jdbc_demo.known.named_parameters;
 
 import org.springframework.lang.NonNullApi;

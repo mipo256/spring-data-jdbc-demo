@@ -20,4 +20,8 @@ public class Aircraft {
   private UUID id;
 
   private String model;
+
+  public Aircraft(String model) {
+    this.model = model;
+  }
 }

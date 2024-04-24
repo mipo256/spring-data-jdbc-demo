@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
-import tech.mpolivaha.jdbc_demo.known.quety_mapping_is_broken.ComplexEntity;
+import tech.mpolivaha.jdbc_demo.known.query_mapping.ComplexEntity;
 
 @Component
 public class ComplexEntityRowMapper implements RowMapper<ComplexEntity> {

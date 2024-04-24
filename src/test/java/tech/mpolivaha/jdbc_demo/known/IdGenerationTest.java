@@ -1,30 +1,25 @@
 package tech.mpolivaha.jdbc_demo.known;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.Optional;
 import java.util.UUID;
-import org.assertj.core.api.ThrowableAssert.ThrowingCallable;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
-import org.springframework.dao.IncorrectUpdateSemanticsDataAccessException;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
-import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import tech.mpolivaha.jdbc_demo.AbstractIntegrationTest;
 import tech.mpolivaha.jdbc_demo.Application;
 import tech.mpolivaha.jdbc_demo.ConfigurationForSpringDataJdbcTests;
 import tech.mpolivaha.jdbc_demo.known.idgeneration.Aircraft;
 import tech.mpolivaha.jdbc_demo.known.idgeneration.AircraftRepository;
-import tech.mpolivaha.jdbc_demo.known.idgeneration.Article;
 import tech.mpolivaha.jdbc_demo.known.idgeneration.ArticleRepository;
 
 @SpringBootTest(classes = Application.class)
 @Import(ConfigurationForSpringDataJdbcTests.class)
-class IdGenerationTest_1 extends AbstractIntegrationTest {
+class IdGenerationTest extends AbstractIntegrationTest {
 
   @Autowired
   private ArticleRepository articleRepository;
@@ -36,7 +31,7 @@ class IdGenerationTest_1 extends AbstractIntegrationTest {
   private AircraftRepository aircraftRepository;
 
   @Test
-  void whenUsingRepository_thenIdIsOverriddenAlways() {
+  void whenUsingJdbcAggregateTemplate_thenInsertCanHelp() {
     UUID id = UUID.randomUUID();
 
     jdbcAggregateTemplate.insert(new Aircraft(id, "My Model"));
@@ -47,16 +42,14 @@ class IdGenerationTest_1 extends AbstractIntegrationTest {
   }
 
   @Test
-  void whenUsingJdbcAggregateTemplate_thenInsertCanHelp() {
-    UUID id = UUID.fromString("83d72eb5-9eb6-4218-959c-ce333b1fc5f2");
-
-    assertThatThrownBy(() -> aircraftRepository.save(new Aircraft(id, "My Model"))).doesNotThrowAnyException();
+  void whenUsingBeforeSaveCallback_thenConversionHappensBeforeCallback() {
+    assertThatThrownBy(() -> aircraftRepository.save(new Aircraft("My Model"))).doesNotThrowAnyException();
   }
 
   @Test
-  void whenUsingCustomBeforeConvertCallback_thenIdAssignmentDoesNotWork() {
-    Article saved = articleRepository.save(new Article().setName("Spring Data Jdbc"));
+  void whenUsingCustomBeforeConvertCallback_thenIdAssignmentShouldNotWork() {
+    Aircraft saved = aircraftRepository.save(new Aircraft().setModel("Spring Data Jdbc"));
 
-    assertThat(articleRepository.findById(saved.getId()).map(Article::getName)).hasValue("Spring Data Jdbc");
+    assertThat(aircraftRepository.findById(saved.getId()).map(Aircraft::getModel)).hasValue("Spring Data Jdbc");
   }
 }

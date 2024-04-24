@@ -18,7 +18,7 @@ import org.springframework.data.jdbc.core.convert.JdbcCustomConversions;
 import org.springframework.data.jdbc.repository.config.AbstractJdbcConfiguration;
 import tech.mpolivaha.jdbc_demo.AbstractIntegrationTest;
 import tech.mpolivaha.jdbc_demo.Application;
-import tech.mpolivaha.jdbc_demo.known.CustomConversionsTest_2.CurrentConfig;
+import tech.mpolivaha.jdbc_demo.known.CustomConversionsTest.CurrentConfig;
 import tech.mpolivaha.jdbc_demo.known.customconversions.Currency;
 import tech.mpolivaha.jdbc_demo.known.customconversions.CurrencyRepository;
 import tech.mpolivaha.jdbc_demo.known.customconversions.Location;
@@ -26,7 +26,7 @@ import tech.mpolivaha.jdbc_demo.known.customconversions.LocationRepository;
 
 @SpringBootTest(classes = Application.class)
 @Import({CurrentConfig.class})
-public class CustomConversionsTest_2 extends AbstractIntegrationTest {
+public class CustomConversionsTest extends AbstractIntegrationTest {
 
   @Configuration
   static class CurrentConfig extends AbstractJdbcConfiguration {

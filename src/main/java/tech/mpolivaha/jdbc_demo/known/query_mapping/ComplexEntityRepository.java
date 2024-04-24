@@ -1,4 +1,4 @@
-package tech.mpolivaha.jdbc_demo.known.quety_mapping_is_broken;
+package tech.mpolivaha.jdbc_demo.known.query_mapping;
 
 import java.util.Optional;
 import org.springframework.data.jdbc.repository.query.Query;
