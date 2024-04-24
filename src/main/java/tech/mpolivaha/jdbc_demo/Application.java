@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jdbc.repository.config.EnableJdbcAuditing;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.data.relational.core.mapping.event.BeforeSaveCallback;
-import tech.mpolivaha.jdbc_demo.known.idgeneration.Article;
+import tech.mpolivaha.jdbc_demo.idgeneration.Article;
 
 @SpringBootApplication
 @EnableJdbcRepositories
